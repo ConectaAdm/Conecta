@@ -16,7 +16,6 @@ O **C.O.N.E.C.T.A** é uma plataforma desenvolvida para conectar universitários
 
 ```text
 Conecta/
-├── node_modules/
 ├── public/
 │   ├── assets/        # Imagens e logotipos (ex: CONECTA-LOGO.png)
 │   ├── css/           # Estilizações (login.css, cadastro.css, etc.)
