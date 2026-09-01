@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - C.O.N.E.C.T.A</title>
+    <link rel="stylesheet" href="../css/cadastro.css">
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <main class="auth-container">
+        <form class="auth-card">
+            <h2>Crie sua conta</h2>
+            <p>Conecte-se e estude com universitários de todo o Brasil</p>
+
+            <div class="input-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="faculdade">Instituição de Ensino</label>
+                <input type="text" id="faculdade" name="faculdade" placeholder="Ex: UFRJ, USP, Unicamp..." required>
+            </div>
+
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Criar Conta</button>
+
+            <p class="auth-footer">
+                Já possui uma conta? <a href="/login">Entrar</a>
+            </p>
+        </form>
+    </main>
+</body>
+</html>
