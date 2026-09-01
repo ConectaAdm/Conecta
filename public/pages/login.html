@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - CONECTA</title>
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-header">
+      <a href="/" class="logo">CONECTA</a>
+      <h2>Acesse sua conta</h2>
+      <p>Entre para acessar suas salas e materiais de estudo</p>
+    </div>
+
+    <form class="auth-form" action="/login" method="POST">
+      <div class="form-group">
+        <label for="email">E-mail Universitário</label>
+        <input type="email" id="email" name="email" placeholder="seu.nome@faculdade.edu.br" required>
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="••••••••" required>
+      </div>
+
+      <div class="form-options">
+        <label><input type="checkbox"> Lembrar de mim</label>
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Ainda não tem conta? <a href="/cadastro">Cadastre-se</a></p>
+    </div>
+  </div>
+</body>
+</html>
