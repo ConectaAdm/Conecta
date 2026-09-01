@@ -4,7 +4,7 @@ O **C.O.N.E.C.T.A** é uma plataforma desenvolvida para conectar universitários
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 * **Backend:** Node.js, Express
 * **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
@@ -12,7 +12,7 @@ O **C.O.N.E.C.T.A** é uma plataforma desenvolvida para conectar universitários
 
 ---
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```text
 Conecta/
@@ -26,7 +26,7 @@ Conecta/
 ├── package-lock.json  # Mapeamento de versões de dependências
 ├── README.md          # Documentação do repositório
 └── server.js          # Servidor principal da aplicação em Express
-⚙️ Como Executar o Projeto
+Como Executar o Projeto
 Clonar o repositório:
 
 Bash
@@ -45,26 +45,3 @@ Bash
 node server.js
 Acessar no navegador:
 Abra http://localhost:3000 (ou a porta definida no console).
-
-🌿 Fluxo de Contribuição com Git
-Criar ou acessar sua branch de desenvolvimento:
-
-Bash
-git checkout -b nome-da-branch
-Salvar alterações e enviar para o GitHub:
-
-Bash
-git add .
-git commit -m "feat: descrição da alteração"
-git push origin nome-da-branch
-Integrar na branch principal:
-
-Acesse o repositório no GitHub e abra um Pull Request (PR) da sua branch para a main.
-
-Após a revisão/aprovação, realize o Merge.
-
-Atualize a main localmente na sua máquina:
-
-Bash
-git checkout main
-git pull origin main
