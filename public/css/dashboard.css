@@ -12,7 +12,7 @@ body {
     color: #0f172a;
 }
 
-\\criando uma navbar
+/*criando uma navbar*/
 .navbar {
     background: #ffffff;
     border-bottom: 1px solid #e2e8f0;
@@ -37,7 +37,7 @@ body {
     display: block;
 }
 
-\\crindo componente do perfil na lateral superior
+/*crindo componente do perfil na lateral superior*/
 
 .user-profile-container {
     position: relative;
@@ -85,4 +85,50 @@ body {
 .user-course {
     font-size: 0.75rem;
     color: #64748b;
+}
+
+/*Menu de descida*/
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 180px;
+    padding: 0.5rem;
+    z-index: 1000;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.profile-dropdown.show {
+    display: flex;
+}
+
+.profile-dropdown a {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    color: #334155;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.profile-dropdown a:hover {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+}
+
+.profile-dropdown .logout-btn {
+    color: #ef4444;
+}
+
+.profile-dropdown .logout-btn:hover {
+    background-color: #fee2e2;
+    color: #dc2626;
 }
