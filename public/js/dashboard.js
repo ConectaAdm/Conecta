@@ -18,3 +18,24 @@ function openProfileModal() {
     document.getElementById('profileModal').classList.add('active');
     toggleProfileMenu();
 }
+function closeProfileModal() {
+    document.getElementById('profileModal').classList.remove('active');
+}
+
+// Salvar Perfil Alterado
+function saveProfile() {
+    const newName = document.getElementById('inputName').value;
+    const newCourse = document.getElementById('inputCourse').value;
+
+    if (newName.trim() !== '') {
+        document.getElementById('headerUserName').innerText = newName;
+        const initials = newName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        document.getElementById('userAvatarInitials').innerText = initials;
+    }
+
+    if (newCourse.trim() !== '') {
+        document.getElementById('headerUserCourse').innerText = newCourse;
+    }
+
+    closeProfileModal();
+}
