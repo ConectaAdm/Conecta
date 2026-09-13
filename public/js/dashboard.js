@@ -39,3 +39,12 @@ function saveProfile() {
 
     closeProfileModal();
 }
+
+// Abrir/Fechar Modal de Salas
+function openRoomModal() {
+    document.getElementById('roomModal').classList.add('active');
+}
+
+function closeRoomModal() {
+    document.getElementById('roomModal').classList.remove('active');
+}
