@@ -6,3 +6,9 @@ function switchTab(tabId) {
     document.getElementById(tabId).classList.add('active');
     event.currentTarget.classList.add('active');
 }
+
+// Menu de Perfil Dropdown
+function toggleProfileMenu() {
+    const menu = document.getElementById('profileMenu');
+    menu.classList.toggle('show');
+}
