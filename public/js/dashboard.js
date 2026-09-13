@@ -12,3 +12,9 @@ function toggleProfileMenu() {
     const menu = document.getElementById('profileMenu');
     menu.classList.toggle('show');
 }
+
+// Abrir/Fechar Modal de Perfil
+function openProfileModal() {
+    document.getElementById('profileModal').classList.add('active');
+    toggleProfileMenu();
+}
