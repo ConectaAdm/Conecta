@@ -77,3 +77,8 @@ function createNewRoom() {
     document.getElementById('inputRoomTitle').value = '';
     closeRoomModal();
 }
+
+// Logout
+function fazerLogout() {
+    alert('Você saiu da conta com sucesso!');
+}
