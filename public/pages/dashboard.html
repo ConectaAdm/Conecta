@@ -113,3 +113,45 @@
         div>
 
     </main>
+
+    <!-- MODAL EDITAR PERFIL -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Editar Seus Dados</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                <label style="font-size: 0.85rem; font-weight: 600;">Seu Nome:</label>
+                <input type="text" id="inputName" value="Pedro Daniel">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                <label style="font-size: 0.85rem; font-weight: 600;">Seu Curso e Período:</label>
+                <input type="text" id="inputCourse" value="Eng. Software • 4º P.">
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                <button class="btn-primary" style="flex: 1;" onclick="saveProfile()">Salvar</button>
+                <button class="btn-outline" style="flex: 1;" onclick="closeProfileModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CRIAR SALA -->
+    <div id="roomModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Criar Nova Sala de Estudos</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                <label style="font-size: 0.85rem; font-weight: 600;">Nome da Matéria:</label>
+                <input type="text" id="inputSubject" placeholder="Ex: Cálculo II, Redes, etc.">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                <label style="font-size: 0.85rem; font-weight: 600;">Título da Sala:</label>
+                <input type="text" id="inputRoomTitle" placeholder="Ex: Grupo de Estudos para a Prova">
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                <button class="btn-primary" style="flex: 1;" onclick="createNewRoom()">Criar Sala</button>
+                <button class="btn-outline" style="flex: 1;" onclick="closeRoomModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/dashboards.js"></script>
+</body>
+</html>
