@@ -48,3 +48,32 @@ function openRoomModal() {
 function closeRoomModal() {
     document.getElementById('roomModal').classList.remove('active');
 }
+
+// Criar Nova Sala Dinâmica
+function createNewRoom() {
+    const subject = document.getElementById('inputSubject').value;
+    const title = document.getElementById('inputRoomTitle').value;
+
+    if (!subject || !title) {
+        alert('Por favor, preencha a matéria e o título da sala.');
+        return;
+    }
+
+    const roomsList = document.getElementById('roomsList');
+    
+    const newRoomItem = document.createElement('div');
+    newRoomItem.className = 'room-item';
+    newRoomItem.innerHTML = `
+        <div class="item-info">
+            <h4>[${subject}] ${title}</h4>
+            <p>Matéria: ${subject} • 1 participante online (Você)</p>
+        </div>
+        <button class="btn-primary" onclick="alert('Entrando na sala virtual...')">Entrar na Sala</button>
+    `;
+
+    roomsList.prepend(newRoomItem);
+    
+    document.getElementById('inputSubject').value = '';
+    document.getElementById('inputRoomTitle').value = '';
+    closeRoomModal();
+}
