@@ -82,3 +82,13 @@ function createNewRoom() {
 function fazerLogout() {
     alert('Você saiu da conta com sucesso!');
 }
+
+// Fechar menus se clicar fora
+window.onclick = function(event) {
+    if (!event.target.closest('.user-profile-container')) {
+        const menu = document.getElementById('profileMenu');
+        if (menu && menu.classList.contains('show')) {
+            menu.classList.remove('show');
+        }
+    }
+};
