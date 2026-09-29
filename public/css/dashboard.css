@@ -12,7 +12,6 @@ body {
     color: #0f172a;
 }
 
-/*criando uma navbar*/
 .navbar {
     background: #ffffff;
     border-bottom: 1px solid #e2e8f0;
@@ -36,8 +35,6 @@ body {
     height: auto;
     display: block;
 }
-
-/*crindo componente do perfil na lateral superior*/
 
 .user-profile-container {
     position: relative;
@@ -87,8 +84,6 @@ body {
     color: #64748b;
 }
 
-/*Menu de descida*/
-
 .profile-dropdown {
     display: none;
     position: absolute;
@@ -133,7 +128,6 @@ body {
     color: #dc2626;
 }
 
-/* Container Principal */
 .main-container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -143,7 +137,6 @@ body {
     gap: 2rem;
 }
 
-/* Abas de Navegação Interna */
 .nav-tabs {
     display: flex;
     gap: 0.5rem;
@@ -167,7 +160,6 @@ body {
     color: #4f46e5;
 }
 
-/* Grid de Conteúdo */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -180,7 +172,6 @@ body {
     }
 }
 
-/* Cartões Padrão */
 .card {
     background: #ffffff;
     padding: 1.5rem;
@@ -203,7 +194,6 @@ body {
     color: #0f172a;
 }
 
-/* Botões do Sistema */
 .btn-primary {
     background-color: #4f46e5;
     color: #ffffff;
@@ -260,7 +250,6 @@ body {
     color: #64748b;
 }
 
-/* Seção Oculta para Abas */
 .tab-content {
     display: none;
 }
@@ -271,7 +260,6 @@ body {
     gap: 1.5rem;
 }
 
-/* Modais */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -301,4 +289,50 @@ body {
     padding: 0.75rem;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
+}
+
+.user-profile-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-avatar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-width: 180px;
+    z-index: 1000;
+    padding: 0.5rem 0;
+}
+
+.profile-dropdown.show {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-dropdown a {
+    padding: 0.6rem 1rem;
+    color: #334155;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f1f5f9;
+}
+
+.profile-dropdown a.logout-btn {
+    color: #ef4444;
 }

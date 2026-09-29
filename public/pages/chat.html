@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONECTA - Chat de Estudos</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/chat.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/dashboard.js" defer></script>
+</head>
+<body>
+
+
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
+    </div>
+
+    <nav class="nav-links">
+      <a href="/dashboard">Início & Matches</a>
+      <a href="/chat" class="active">Salas de Estudo</a>
+      <a href="/dashboard">Materiais</a>
+    </nav>
+
+    <div class="user-profile-container">
+      <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
+        <div id="userAvatarInitials" class="user-avatar">--</div>
+        <div class="user-info-brief">
+          <span id="headerUserName" class="user-name">Carregando...</span>
+          <span id="headerUserCourse" class="user-course">...</span>
+        </div>
+      </div>
+
+      <div id="profileMenu" class="profile-dropdown">
+        <a onclick="openProfileModal()">⚙️ Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')">🔒 Configurações</a>
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0.25rem 0;">
+        <a class="logout-btn" onclick="fazerLogout()">🚪 Sair da Conta</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="chat-layout">
+    
+    <aside class="chat-sidebar">
+      <div class="sidebar-header">
+        <h3>Minhas Salas</h3>
+        <button class="btn btn-secondary btn-sm">+ Criar</button>
+      </div>
+      <div class="chat-list">
+        <div class="chat-item active">
+          <div class="chat-item-icon">💻</div>
+          <div class="chat-item-info">
+            <h4>POO - Java</h4>
+            <p>Ana Clara: Enviei o PDF do exercício...</p>
+          </div>
+        </div>
+        <div class="chat-item">
+          <div class="chat-item-icon">📐</div>
+          <div class="chat-item-info">
+            <h4>Cálculo II</h4>
+            <p>Mateus: Alguém fez a questão 4?</p>
+          </div>
+        </div>
+        <div class="chat-item">
+          <div class="chat-item-icon">⚖️</div>
+          <div class="chat-item-info">
+            <h4>Direito Constitucional</h4>
+            <p>Gabriel: Reunião às 19h no Pomodoro</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="chat-main">
+      <header class="chat-header">
+        <div class="chat-header-info">
+          <h2>Programação Orientada a Objetos (POO)</h2>
+          <span class="badge-topic">Ementa: Herança, Polimorfismo e Interfaces</span>
+        </div>
+        <button class="btn btn-primary btn-sm">⏱️ Iniciar Pomodoro</button>
+      </header>
+
+      <div class="messages-container">
+        <div class="system-message">
+          <span>Você entrou na sala de estudos de POO</span>
+        </div>
+
+        <div class="message">
+          <div class="avatar">AC</div>
+          <div class="message-content">
+            <div class="message-header">
+              <span class="user-name">Ana Clara</span>
+              <time>14:32</time>
+            </div>
+            <p>Pessoal, montei um resumo sobre Interfaces x Classes Abstratas. Quem quiser dar uma olhada, anexei o arquivo abaixo!</p>
+
+            <div class="attachment-card">
+              <div class="attachment-icon">📄</div>
+              <div class="attachment-details">
+                <strong>Resumo_Interfaces_POO.pdf</strong>
+                <span>PDF • 1.2 MB</span>
+              </div>
+              <a href="#" class="btn btn-secondary btn-sm">Baixar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="message message-own">
+          <div class="message-content">
+            <div class="message-header">
+              <time>14:35</time>
+              <span class="user-name">Você</span>
+            </div>
+            <p>Show de bola, Ana! Estava com dúvida justamente nisso para a prova de semana que vem.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="chat-footer">
+        <form class="chat-input-area">
+          <label for="file-upload" class="btn-attach" title="Anexar Material">
+            📎
+            <input type="file" id="file-upload" hidden>
+          </label>
+          <input type="text" placeholder="Escreva sua dúvida ou mensagem..." required>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </footer>
+    </main>
+
+    <aside class="chat-details">
+      <div class="details-section">
+        <h3>Participantes (3)</h3>
+        <ul class="user-list">
+          <li><span class="status-dot online"></span> Ana Clara</li>
+          <li><span class="status-dot online"></span> Pedro Daniel</li>
+          <li><span class="status-dot offline"></span> Lucas Silva</li>
+        </ul>
+      </div>
+
+      <div class="details-section">
+        <h3>Materiais Compartilhados</h3>
+        <div class="shared-materials">
+          <div class="material-item">
+            <span>📄 Resumo_Interfaces.pdf</span>
+            <small>por Ana Clara</small>
+          </div>
+          <div class="material-item">
+            <span>📝 Lista_Exercicios.pdf</span>
+            <small>por Prof. Carlos</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <div id="profileModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <h3>Editar Seus Dados</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Seu Nome:</label>
+        <input type="text" id="inputName" placeholder="Nome Completo">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Seu Curso e Período:</label>
+        <input type="text" id="inputCourse" placeholder="Ex: Eng. Software • 4º P.">
+      </div>
+      <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+        <button class="btn-primary" style="flex: 1;" onclick="saveProfile()">Salvar</button>
+        <button class="btn-outline" style="flex: 1;" onclick="closeProfileModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

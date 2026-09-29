@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - CONECTA</title>
   <link rel="stylesheet" href="../css/login.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script type="module" src="../js/login.js" defer></script>
 </head>
 <body class="auth-page">
   <div class="auth-container">
@@ -14,7 +18,7 @@
       <p>Entre para acessar suas salas e materiais de estudo</p>
     </div>
 
-    <form class="auth-form" action="/login" method="POST">
+    <form class="auth-form" id="loginForm">
       <div class="form-group">
         <label for="email">E-mail Universitário</label>
         <input type="email" id="email" name="email" placeholder="seu.nome@faculdade.edu.br" required>
@@ -26,7 +30,7 @@
       </div>
 
       <div class="form-options">
-        <label><input type="checkbox"> Lembrar de mim</label>
+        <label><input type="checkbox" id="lembrar"> Lembrar de mim</label>
         <a href="#">Esqueceu a senha?</a>
       </div>
 
@@ -34,7 +38,7 @@
     </form>
 
     <div class="auth-footer">
-      <p>Ainda não tem conta? <a href="../pages/cadastro.html">Cadastre-se</a></p>
+      <p>Ainda não tem conta? <a href="/cadastro">Cadastre-se</a></p>
     </div>
   </div>
 </body>
