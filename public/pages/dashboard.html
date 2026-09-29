@@ -6,33 +6,16 @@
     <title>CONECTA - Rede de Estudos & Materiais</title>
     <link rel="stylesheet" href="../css/dashboard.css">
 
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script src="../js/dashboard.js" defer></script>
 </head>
 <body>
-
 
     <header class="navbar">
         <div class="logo-area">
             <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
         </div>
 
-        <div class="user-profile-container">
-            <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
-                <div id="userAvatarInitials" class="user-avatar">--</div>
-                <div class="user-info-brief">
-                    <span id="headerUserName" class="user-name">Carregando...</span>
-                    <span id="headerUserCourse" class="user-course">...</span>
-                </div>
-            </div>
-
-            <div id="profileMenu" class="profile-dropdown">
-                <a onclick="window.location.href='/perfil'">⚙️ Meu Perfil</a>
-                <a onclick="window.location.href='/perfil'">🔒 Configurações</a>
-
-        <!-- Área de Perfil -->
         <div class="user-profile-container">
             <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
                 <div id="userAvatarInitials" class="user-avatar">PD</div>
@@ -42,11 +25,9 @@
                 </div>
             </div>
 
-            <!-- Menu Dropdown -->
             <div id="profileMenu" class="profile-dropdown">
                 <a onclick="openProfileModal()">⚙️ Meu Perfil</a>
                 <a onclick="alert('Configurações em desenvolvimento.')">🔒 Configurações</a>
->>>>>>> 5697313bab8c51a5908d96a4b26cd0ffe0d1c8e5
                 <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0.25rem 0;">
                 <a class="logout-btn" onclick="fazerLogout()">🚪 Sair da Conta</a>
             </div>
@@ -74,7 +55,6 @@
                         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                             <button class="btn-primary" onclick="window.location.href='/chat'">Ver Todas as Salas de Estudo</button>
                             <button class="btn-outline" onclick="window.location.href='/pomodoro'">⏱️ Ir para Pomodoro</button>
-
                         </div>
                     </div>
 
@@ -104,7 +84,6 @@
                                     <h4>Ana Clara</h4>
                                     <p>ADS • Foco em POO / Java</p>
                                 </div>
-
                                 <button class="btn-primary" style="width: 100%; padding: 0.4rem; font-size: 0.8rem;" onclick="window.location.href='/chat'">Conectar / Chat</button>
                             </div>
                         </div>
@@ -151,8 +130,8 @@
             </div>
         </div>
     </div>
-    <div id="roomModal" class="modal-overlay" style="display: none;">
 
+    <div id="roomModal" class="modal-overlay" style="display: none;">
         <div class="modal-card">
             <h3>Criar Nova Sala de Estudos</h3>
             <div style="display: flex; flex-direction: column; gap: 0.3rem;">
@@ -169,5 +148,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
