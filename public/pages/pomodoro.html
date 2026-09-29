@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONECTA - Sala de Foco & Pomodoro</title>
+  
+
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/perfil.css">
+  <link rel="stylesheet" href="../css/pomodoro.css">
+
+  <style>
+
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      padding: 8px 0;
+      z-index: 1000;
+      min-width: 180px;
+    }
+
+    .profile-dropdown.show {
+      display: block;
+    }
+
+    .user-profile-container {
+      position: relative;
+    }
+  </style>
+
+  <script type="module" src="../js/dashboard.js" defer></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo" style="max-height: 50px;">
+    </div>
+
+    <nav class="nav-links">
+      <a href="#">Início & Matches</a>
+      <a href="#">Salas de Estudo</a>
+      <a href="#">Materiais</a>
+      <a href="#" class="active">Foco Pomodoro</a>
+    </nav>
+
+    <div class="user-profile-container">
+      <div class="user-avatar-wrapper" onclick="toggleProfileMenu()" style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
+        <div id="userAvatarInitials" class="user-avatar">PD</div>
+        <div class="user-info-brief">
+          <span id="headerUserName" class="user-name" style="display: block; font-weight: bold;">Pedro Daniel</span>
+          <span id="headerUserCourse" class="user-course" style="font-size: 0.85em; color: #666;">Eng. Software • 4º P.</span>
+        </div>
+      </div>
+
+      <div id="profileMenu" class="profile-dropdown">
+        <a onclick="openProfileModal()" style="cursor: pointer; display: block; padding: 8px 16px;">⚙️ Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')" style="cursor: pointer; display: block; padding: 8px 16px;">🔒 Configurações</a>
+        <hr class="dropdown-divider" style="margin: 4px 0; border: none; border-top: 1px solid #eee;">
+        <a class="logout-btn" onclick="fazerLogout()" style="cursor: pointer; display: block; padding: 8px 16px; color: #d9534f;">🚪 Sair da Conta</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pomodoro-container">
+    
+    <section class="pomodoro-main-card">
+      
+      <div class="pomodoro-modes">
+        <button class="mode-btn active" onclick="setMode('foco', 25)">🧠 Foco (25m)</button>
+        <button class="mode-btn" onclick="setMode('pausa-curta', 5)">☕ Pausa Curta (5m)</button>
+        <button class="mode-btn" onclick="setMode('pausa-longa', 15)">🌴 Pausa Longa (15m)</button>
+      </div>
+
+      <div class="timer-display">
+        <h1 id="timer-text">25:00</h1>
+        <p class="timer-status" id="timer-status">Hora de se concentrar!</p>
+      </div>
+
+      <div class="timer-controls">
+        <button class="btn btn-primary btn-lg" id="start-btn" onclick="toggleTimer()">Iniciar</button>
+        <button class="btn btn-secondary btn-lg" onclick="resetTimer()">Reiniciar</button>
+      </div>
+
+      <div class="cycle-tracker">
+        <span>Ciclos concluídos:</span>
+        <div class="cycle-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+
+      <div class="sound-section">
+        <h3>🎧 Sons Ambiente</h3>
+        <div class="sound-options">
+          <button class="sound-btn active">🌧️ Chuva</button>
+          <button class="sound-btn">☕ Café / Lo-Fi</button>
+          <button class="sound-btn">🌊 Ondas</button>
+          <button class="sound-btn">🔇 Mudo</button>
+        </div>
+      </div>
+
+    </section>
+
+    <aside class="pomodoro-todo-card">
+      <div class="todo-header">
+        <h3>📝 Tarefas da Sessão</h3>
+        <span class="badge-topic">Meta do dia</span>
+      </div>
+
+      <form class="todo-form" onsubmit="addTask(event)">
+        <input type="text" id="todo-input" placeholder="Adicionar tarefa..." required>
+        <button type="submit" class="btn btn-primary">+</button>
+      </form>
+
+      <ul class="todo-list" id="todo-list">
+        <li class="todo-item">
+          <label class="checkbox-container">
+            <input type="checkbox" checked>
+            <span class="checkmark"></span>
+            <span class="task-text done">Ler Capítulo 4 de POO</span>
+          </label>
+          <button class="delete-task">✕</button>
+        </li>
+        <li class="todo-item">
+          <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            <span class="task-text">Resolver 5 exercícios de Herança</span>
+          </label>
+          <button class="delete-task">✕</button>
+        </li>
+        <li class="todo-item">
+          <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            <span class="task-text">Revisar anotações no PDF</span>
+          </label>
+          <button class="delete-task">✕</button>
+        </li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <script>
+    let timer;
+    let timeLeft = 25 * 60;
+    let isRunning = false;
+
+    function updateDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('timer-text').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function toggleTimer() {
+      const startBtn = document.getElementById('start-btn');
+      if (isRunning) {
+        clearInterval(timer);
+        isRunning = false;
+        startBtn.textContent = 'Continuar';
+      } else {
+        isRunning = true;
+        startBtn.textContent = 'Pausar';
+        timer = setInterval(() => {
+          if (timeLeft > 0) {
+            timeLeft--;
+            updateDisplay();
+          } else {
+            clearInterval(timer);
+            isRunning = false;
+            alert('Sessão finalizada!');
+            startBtn.textContent = 'Iniciar';
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      isRunning = false;
+      timeLeft = 25 * 60;
+      updateDisplay();
+      document.getElementById('start-btn').textContent = 'Iniciar';
+    }
+
+    function setMode(mode, minutes) {
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const statusText = document.getElementById('timer-status');
+      if (mode === 'foco') statusText.textContent = 'Hora de se concentrar!';
+      if (mode === 'pausa-curta') statusText.textContent = 'Pausa rápida! Respire um pouco.';
+      if (mode === 'pausa-longa') statusText.textContent = 'Pausa longa! Aproveite para relaxar.';
+
+      clearInterval(timer);
+      isRunning = false;
+      timeLeft = minutes * 60;
+      updateDisplay();
+      document.getElementById('start-btn').textContent = 'Iniciar';
+    }
+
+    function addTask(e) {
+      e.preventDefault();
+      const input = document.getElementById('todo-input');
+      if (!input.value.trim()) return;
+
+      const ul = document.getElementById('todo-list');
+      const li = document.createElement('li');
+      li.className = 'todo-item';
+      li.innerHTML = `
+        <label class="checkbox-container">
+          <input type="checkbox">
+          <span class="checkmark"></span>
+          <span class="task-text">${input.value}</span>
+        </label>
+        <button class="delete-task" onclick="this.parentElement.remove()">✕</button>
+      `;
+      ul.appendChild(li);
+      input.value = '';
+    }
+
+    function toggleProfileMenu() {
+      const menu = document.getElementById('profileMenu');
+      if (menu) {
+        menu.classList.toggle('show');
+      }
+    }
+  </script>
+
+</body>
+</html>

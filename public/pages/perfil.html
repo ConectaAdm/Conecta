@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONECTA - Perfil & Configurações de Estudo</title>
+  
+
+  <link rel="stylesheet" href="../css/perfil.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script type="module" src="../js/dashboard.js" defer></script>
+
+
+</head>
+<body>
+
+
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
+    </div>
+
+
+    <div class="user-profile-container">
+      <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
+        <div id="userAvatarInitials" class="user-avatar">PD</div>
+        <div class="user-info-brief">
+          <span id="headerUserName" class="user-name">Pedro Daniel</span>
+          <span id="headerUserCourse" class="user-course">Eng. Software • 4º P.</span>
+        </div>
+      </div>
+
+
+      <div id="profileMenu" class="profile-dropdown">
+        <a onclick="openProfileModal()">⚙️ Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')">🔒 Configurações</a>
+        <hr class="dropdown-divider">
+        <a class="logout-btn" onclick="fazerLogout()">🚪 Sair da Conta</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="materials-container">
+
+    <div class="materials-header">
+      <div>
+        <h1>Perfil do Estudante & Configurações</h1>
+        <p>Gerencie suas preferências de estudo, visibilidade de perfil e tópicos de interesse.</p>
+      </div>
+      <button class="btn btn-primary" onclick="openProfileModal()">✏️ Editar Dados do Perfil</button>
+    </div>
+
+    <div class="profile-grid">
+
+      <div class="card card-summary">
+        <div class="card-avatar" id="cardAvatarInitials">PD</div>
+        <h2 class="card-title" id="cardUserName">Pedro Daniel</h2>
+        <p class="card-subtitle" id="cardUserCourse">Engenharia de Software • 4º Período</p>
+        <span class="institution-tag">Univassouras</span>
+
+        <hr class="card-divider">
+
+        <div class="card-stats">
+          <div>
+            <strong class="stat-number">12</strong>
+            <span class="stat-label">Materiais</span>
+          </div>
+          <div>
+            <strong class="stat-number">4.8</strong>
+            <span class="stat-label">Avaliação</span>
+          </div>
+          <div>
+            <strong class="stat-number">3</strong>
+            <span class="stat-label">Salas Ativas</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="profile-main-content">
+        
+
+        <div class="card">
+          <div class="card-header">
+            <h3>🎯 Preferências de Estudo & Matches</h3>
+          </div>
+          
+          <form class="form-group" onsubmit="event.preventDefault();">
+            <div>
+              <label class="form-label">Objetivo de Estudo Principal</label>
+              <select class="filter-select full-width">
+                <option value="provas">Preparação para Provas / A1 e A2</option>
+                <option value="projetos">Projetos Práticos e Portfólio</option>
+                <option value="revisao">Revisão Geral e Monitoria</option>
+                <option value="tcc">Pesquisa e TCC</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="form-label">Formato Favorito de Grupo</label>
+              <select class="filter-select full-width">
+                <option value="online">Online (Google Meet / Discord)</option>
+                <option value="presencial">Presencial no Campus</option>
+                <option value="hibrido">Híbrido</option>
+              </select>
+            </div>
+
+  
+            <div>
+              <label class="form-label">Disciplinas e Tópicos de Interesse</label>
+
+              <div class="tags-container" id="tagsContainer">
+                <span class="tag-item">POO <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
+                <span class="tag-item">Back-end <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
+                <span class="tag-item">Estrutura de Dados <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
+                <span class="tag-item">Cálculo II <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
+                <span class="tag-item">Banco de Dados <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
+              </div>
+
+              <div class="tag-input-group">
+                <input type="text" id="tagInput" placeholder="Ex: Front-end, Engenharia de Software, Algoritmos..." onkeydown="handleTagKeyPress(event)">
+                <button type="button" class="btn btn-secondary" onclick="addTagFromInput()">+ Adicionar</button>
+              </div>
+            </div>a
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" onclick="alert('Preferências e disciplinas salvas com sucesso!')">Salvar Preferências</button>
+            </div>
+          </form>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>🔒 Privacidade e Visibilidade</h3>
+          </div>
+
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" checked>
+              Exibir meu perfil em buscas de Matches por Ementa
+            </label>
+
+            <label class="checkbox-label">
+              <input type="checkbox" checked>
+              Permitir convites para Salas de Estudo
+            </label>
+
+            <label class="checkbox-label">
+              <input type="checkbox">
+              Ocultar minhas avaliações de materiais públicos
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <div id="profileModal" class="modal-overlay">
+    <div class="modal-card">
+      <h3>Editar Seus Dados</h3>
+      <div class="modal-field">
+        <label class="modal-label">Seu Nome:</label>
+        <input type="text" id="inputName" value="Pedro Daniel">
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Seu Curso e Período:</label>
+        <input type="text" id="inputCourse" value="Eng. Software • 4º P.">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-flex" onclick="saveProfile()">Salvar</button>
+        <button class="btn btn-outline btn-flex" onclick="closeProfileModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/dashboards.js"></script>
+</body>
+</html>

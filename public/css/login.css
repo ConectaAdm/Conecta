@@ -8,13 +8,11 @@
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Garante que os campos de texto e botões sigam a mesma fonte */
 input, button, select, textarea {
   font-family: inherit;
 }
 
 
-/* Estilos da Tela de Autenticação */
 .auth-page {
   display: flex;
   justify-content: center;
