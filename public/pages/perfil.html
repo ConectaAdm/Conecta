@@ -5,37 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CONECTA - Perfil & Configurações de Estudo</title>
   
-
   <link rel="stylesheet" href="../css/perfil.css">
   <link rel="stylesheet" href="../css/dashboard.css">
-  <script type="module" src="../js/dashboard.js" defer></script>
-
-
+  <!-- SDK do Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Script específico do Perfil -->
+  <script src="../js/perfil.js" defer></script>
 </head>
 <body>
-
 
   <header class="navbar">
     <div class="logo-area">
       <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
     </div>
 
+    <nav class="nav-links">
+      <a href="/dashboard">Início & Matches</a>
+      <a href="/chat">Salas de Estudo</a>
+      <a href="/materiais">Materiais</a>
+    </nav>
 
     <div class="user-profile-container">
       <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
-        <div id="userAvatarInitials" class="user-avatar">PD</div>
+        <div id="userAvatarInitials" class="user-avatar">--</div>
         <div class="user-info-brief">
-          <span id="headerUserName" class="user-name">Pedro Daniel</span>
-          <span id="headerUserCourse" class="user-course">Eng. Software • 4º P.</span>
+          <span id="headerUserName" class="user-name">Carregando...</span>
+          <span id="headerUserCourse" class="user-course">...</span>
         </div>
       </div>
 
-
       <div id="profileMenu" class="profile-dropdown">
-        <a onclick="openProfileModal()">⚙️ Meu Perfil</a>
-        <a onclick="alert('Configurações em desenvolvimento.')">🔒 Configurações</a>
+        <a onclick="openProfileModal()"><span class="dropdown-icon">⚙️</span> Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')"><span class="dropdown-icon">🔒</span> Configurações</a>
         <hr class="dropdown-divider">
-        <a class="logout-btn" onclick="fazerLogout()">🚪 Sair da Conta</a>
+        <a class="logout-btn" onclick="fazerLogout()"><span class="dropdown-icon">🚪</span> Sair da Conta</a>
       </div>
     </div>
   </header>
@@ -53,9 +56,9 @@
     <div class="profile-grid">
 
       <div class="card card-summary">
-        <div class="card-avatar" id="cardAvatarInitials">PD</div>
-        <h2 class="card-title" id="cardUserName">Pedro Daniel</h2>
-        <p class="card-subtitle" id="cardUserCourse">Engenharia de Software • 4º Período</p>
+        <div class="card-avatar" id="cardAvatarInitials">--</div>
+        <h2 class="card-title" id="cardUserName">Carregando...</h2>
+        <p class="card-subtitle" id="cardUserCourse">...</p>
         <span class="institution-tag">Univassouras</span>
 
         <hr class="card-divider">
@@ -76,10 +79,8 @@
         </div>
       </div>
 
-
       <div class="profile-main-content">
         
-
         <div class="card">
           <div class="card-header">
             <h3>🎯 Preferências de Estudo & Matches</h3>
@@ -104,30 +105,27 @@
                 <option value="hibrido">Híbrido</option>
               </select>
             </div>
-
-  
+ 
             <div>
               <label class="form-label">Disciplinas e Tópicos de Interesse</label>
 
+              <!-- Container limpo para carregar as tags salvas dinamicamente via JS -->
               <div class="tags-container" id="tagsContainer">
-                <span class="tag-item">POO <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
-                <span class="tag-item">Back-end <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
-                <span class="tag-item">Estrutura de Dados <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
-                <span class="tag-item">Cálculo II <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
-                <span class="tag-item">Banco de Dados <span class="remove-tag" onclick="removeTag(this)">✕</span></span>
+                <!-- As tags são injetadas dinamicamente aqui -->
               </div>
 
               <div class="tag-input-group">
                 <input type="text" id="tagInput" placeholder="Ex: Front-end, Engenharia de Software, Algoritmos..." onkeydown="handleTagKeyPress(event)">
                 <button type="button" class="btn btn-secondary" onclick="addTagFromInput()">+ Adicionar</button>
               </div>
-            </div>a
+            </div>
 
             <div class="form-actions">
               <button type="button" class="btn btn-primary" onclick="alert('Preferências e disciplinas salvas com sucesso!')">Salvar Preferências</button>
             </div>
           </form>
         </div>
+
         <div class="card">
           <div class="card-header">
             <h3>🔒 Privacidade e Visibilidade</h3>
@@ -156,24 +154,24 @@
     </div>
   </main>
 
-  <div id="profileModal" class="modal-overlay">
+  <!-- Modal de Edição de Perfil -->
+  <div id="profileModal" class="modal-overlay" style="display: none;">
     <div class="modal-card">
       <h3>Editar Seus Dados</h3>
-      <div class="modal-field">
-        <label class="modal-label">Seu Nome:</label>
-        <input type="text" id="inputName" value="Pedro Daniel">
+      <div class="modal-field" style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.5rem;">
+        <label class="modal-label" style="font-size: 0.85rem; font-weight: 600;">Seu Nome:</label>
+        <input type="text" id="inputName" placeholder="Nome Completo">
       </div>
-      <div class="modal-field">
-        <label class="modal-label">Seu Curso e Período:</label>
-        <input type="text" id="inputCourse" value="Eng. Software • 4º P.">
+      <div class="modal-field" style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.8rem;">
+        <label class="modal-label" style="font-size: 0.85rem; font-weight: 600;">Seu Curso e Período:</label>
+        <input type="text" id="inputCourse" placeholder="Ex: Eng. Software • 4º P.">
       </div>
-      <div class="modal-actions">
-        <button class="btn btn-primary btn-flex" onclick="saveProfile()">Salvar</button>
-        <button class="btn btn-outline btn-flex" onclick="closeProfileModal()">Cancelar</button>
+      <div class="modal-actions" style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-primary btn-flex" style="flex: 1;" onclick="saveProfile()">Salvar</button>
+        <button class="btn btn-outline btn-flex" style="flex: 1;" onclick="closeProfileModal()">Cancelar</button>
       </div>
     </div>
   </div>
 
-  <script src="../js/dashboards.js"></script>
 </body>
 </html>

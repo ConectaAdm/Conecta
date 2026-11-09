@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Correção do seletor universal de '-' para '*' (caso vá adicionar) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+}
 
 .profile-grid {
   display: grid;
@@ -54,6 +69,7 @@
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
+  display: inline-block;
 }
 
 .card-divider {
@@ -72,6 +88,7 @@
   display: block;
   font-size: 1.1rem;
   color: #1e293b;
+  font-weight: 700;
 }
 
 .stat-label {
@@ -216,4 +233,30 @@
 
 .profile-dropdown.active {
   display: block !important;
+}
+
+/* --- Ajustes Responsivos para Celular (< 768px) --- */
+@media (max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr; /* Transforma o grid de 2 colunas em coluna única */
+    gap: 1rem;
+  }
+
+  .card-summary {
+    padding: 1.5rem 1rem;
+  }
+
+  .tag-input-group {
+    flex-direction: column; /* Empilha input e botão de tag no mobile se necessário */
+  }
+
+  .modal-actions {
+    flex-direction: column; /* Empilha botões em modais para melhor usabilidade no toque */
+  }
+
+  .tag-input-group input,
+  .modal-field input,
+  .form-group input {
+    font-size: 16px; /* Previne zoom automático indesejado no iOS */
+  }
 }

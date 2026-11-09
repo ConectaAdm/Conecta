@@ -10,6 +10,7 @@ const app = express();
 // Define a porta em que o servidor irá rodar (neste caso, a porta 3000)
 const port = 3000;
 
+
 // Configura o Express para servir arquivos estáticos (como CSS, imagens, JavaScript do cliente) a partir da pasta 'public'
 app.use(express.static('public'));
 

@@ -1,11 +1,12 @@
 /* --- Base da Navbar --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* Corrigido o seletor universal de '-' para '*' */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .navbar {
@@ -304,4 +305,62 @@
 .material-item small {
   color: #64748b;
   font-size: 0.72rem;
+}
+
+/* --- Ajustes Responsivos para Mobile --- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+    height: 60px;
+  }
+
+  .nav-links a {
+    margin: 0 6px;
+    font-size: 0.85rem;
+  }
+
+  .chat-layout {
+    grid-template-columns: 1fr; /* Coluna única no mobile */
+    height: calc(100vh - 60px);
+  }
+
+  /* Oculta a sidebar de salas e o painel lateral de detalhes no mobile por padrão */
+  .chat-sidebar,
+  .chat-details {
+    display: none;
+  }
+
+  /* Expande o chat principal para ocuparem 100% da largura */
+  .chat-main {
+    border-right: none;
+    width: 100%;
+  }
+
+  .chat-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .messages-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .message {
+    max-width: 90%; /* Aumenta a largura dos balões de mensagem no celular */
+  }
+
+  .chat-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .chat-input-area input[type="text"] {
+    font-size: 16px; /* Evita zoom automático no Safari iOS ao focar no input */
+  }
+}
+
+.profile-dropdown a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  white-space: nowrap !important;
 }
