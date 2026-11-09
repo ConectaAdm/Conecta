@@ -17,19 +17,21 @@
         </div>
 
         <div class="user-profile-container">
+            <!-- Clica no avatar/nome para abrir o menu suspenso original -->
             <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
-                <div id="userAvatarInitials" class="user-avatar">PD</div>
+                <div id="userAvatarInitials" class="user-avatar">--</div>
                 <div class="user-info-brief">
-                    <span id="headerUserName" class="user-name">Pedro Daniel</span>
-                    <span id="headerUserCourse" class="user-course">Eng. Software • 4º P.</span>
+                    <span id="headerUserName" class="user-name">Carregando...</span>
+                    <span id="headerUserCourse" class="user-course">...</span>
                 </div>
             </div>
 
+            <!-- Menu suspenso (Dropdown) restaurado -->
             <div id="profileMenu" class="profile-dropdown">
-                <a onclick="openProfileModal()">⚙️ Meu Perfil</a>
-                <a onclick="alert('Configurações em desenvolvimento.')">🔒 Configurações</a>
+                <a onclick="window.location.href='/perfil'"><span class="dropdown-icon">⚙️</span> Meu Perfil</a>
+                <a onclick="alert('Configurações em desenvolvimento.')"><span class="dropdown-icon">🔒</span> Configurações</a>
                 <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0.25rem 0;">
-                <a class="logout-btn" onclick="fazerLogout()">🚪 Sair da Conta</a>
+                <a class="logout-btn" onclick="fazerLogout()"><span class="dropdown-icon">🚪</span> Sair da Conta</a>
             </div>
         </div>
     </header>
@@ -112,24 +114,6 @@
         </div>
 
     </main>
-
-    <div id="profileModal" class="modal-overlay" style="display: none;">
-        <div class="modal-card">
-            <h3>Editar Seus Dados</h3>
-            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
-                <label style="font-size: 0.85rem; font-weight: 600;">Seu Nome:</label>
-                <input type="text" id="inputName" placeholder="Nome Completo">
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
-                <label style="font-size: 0.85rem; font-weight: 600;">Seu Curso e Período:</label>
-                <input type="text" id="inputCourse" placeholder="Ex: Eng. Software • 4º P.">
-            </div>
-            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-                <button class="btn-primary" style="flex: 1;" onclick="saveProfile()">Salvar</button>
-                <button class="btn-outline" style="flex: 1;" onclick="closeProfileModal()">Cancelar</button>
-            </div>
-        </div>
-    </div>
 
     <div id="roomModal" class="modal-overlay" style="display: none;">
         <div class="modal-card">

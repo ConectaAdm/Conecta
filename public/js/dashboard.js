@@ -1,5 +1,3 @@
-
-
 if (typeof window.supabaseClient === 'undefined') {
   const SUPABASE_URL = 'https://ogpylujeroumxxhnpzwo.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_xN98jCv8nuTgBJoJN5wZXQ_3kb1F_MM';
@@ -7,6 +5,7 @@ if (typeof window.supabaseClient === 'undefined') {
 }
 
 var supabase = window.supabaseClient;
+let usuarioAtual = null;
 
 window.toggleProfileMenu = function() {
   const profileMenu = document.getElementById('profileMenu');
@@ -25,11 +24,55 @@ window.openProfileModal = function() {
   const menu = document.getElementById('profileMenu');
   if (menu) menu.classList.remove('show');
   if (modal) modal.style.display = 'flex';
+
+  const nameElement = document.getElementById('headerUserName');
+  const courseElement = document.getElementById('headerUserCourse');
+  
+  const inputName = document.getElementById('inputName');
+  const inputCourse = document.getElementById('inputCourse');
+
+  if (inputName && nameElement) inputName.value = nameElement.innerText;
+  if (inputCourse && courseElement) inputCourse.value = courseElement.innerText;
 };
 
 window.closeProfileModal = function() {
   const modal = document.getElementById('profileModal');
   if (modal) modal.style.display = 'none';
+};
+
+window.saveProfile = async function() {
+  const novoNome = document.getElementById('inputName')?.value.trim();
+  const novaInstituicao = document.getElementById('inputCourse')?.value.trim();
+
+  if (!novoNome) {
+    alert('O nome não pode estar vazio.');
+    return;
+  }
+
+  try {
+    // 1. Atualiza no Supabase Auth (metadados)
+    const { data, error: authError } = await supabase.auth.updateUser({
+      data: { nome: novoNome, instituicao: novaInstituicao, full_name: novoNome }
+    });
+
+    if (authError) throw authError;
+
+    // 2. Atualiza na tabela 'alunos' para manter sincronizado
+    if (usuarioAtual) {
+      await supabase
+        .from('alunos')
+        .update({ nome: novoNome, instituicao: novaInstituicao })
+        .eq('id', usuarioAtual.id);
+    }
+
+    alert('Perfil atualizado com sucesso!');
+    window.closeProfileModal();
+    await carregarDadosUsuario(); // Recarrega os dados imediatamente na tela
+
+  } catch (err) {
+    alert('Erro ao salvar perfil: ' + err.message);
+    console.error(err);
+  }
 };
 
 window.switchTab = function(tabId) {
@@ -70,14 +113,21 @@ async function carregarDadosUsuario() {
       return;
     }
 
+    usuarioAtual = user;
+
+    // Tenta buscar da tabela alunos
     const { data: aluno } = await supabase
       .from('alunos')
       .select('nome, instituicao')
       .eq('id', user.id)
-      .single();
+      .maybeSingle();
 
-    const nomeCompleto = aluno?.nome || user.user_metadata?.nome || 'Usuário';
-    const instituicao = aluno?.instituicao || user.user_metadata?.instituicao || 'Estudante';
+    // ORDEM DE PRIORIDADE CORRIGIDA: 
+    // 1º user_metadata (o que foi alterado recentemente por último)
+    // 2º tabela alunos 
+    // 3º email
+    const nomeCompleto = user.user_metadata?.nome || user.user_metadata?.full_name || aluno?.nome || user.email.split('@')[0];
+    const instituicao = user.user_metadata?.instituicao || aluno?.instituicao || 'Estudante';
 
     const nameElement = document.getElementById('headerUserName');
     const courseElement = document.getElementById('headerUserCourse');
@@ -98,8 +148,4 @@ async function carregarDadosUsuario() {
   } catch (err) {
     console.error('Erro ao carregar os dados do perfil:', err);
   }
-}
-
-window.irParaChat = function() {
-  window.location.href = 'chat.html';
 }

@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="../css/dashboard.css">
   <link rel="stylesheet" href="../css/chat.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../js/dashboard.js" defer></script>
+  <script src="../js/chat.js" defer></script>
 </head>
 <body>
-
 
   <header class="navbar">
     <div class="logo-area">
@@ -20,7 +19,7 @@
     <nav class="nav-links">
       <a href="/dashboard">Início & Matches</a>
       <a href="/chat" class="active">Salas de Estudo</a>
-      <a href="/dashboard">Materiais</a>
+      <a href="/materiais">Materiais</a>
     </nav>
 
     <div class="user-profile-container">
@@ -33,10 +32,10 @@
       </div>
 
       <div id="profileMenu" class="profile-dropdown">
-        <a onclick="openProfileModal()">⚙️ Meu Perfil</a>
-        <a onclick="alert('Configurações em desenvolvimento.')">🔒 Configurações</a>
+        <a onclick="window.location.href='/perfil'"><span class="dropdown-icon">⚙️</span> Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')"><span class="dropdown-icon">🔒</span> Configurações</a>
         <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0.25rem 0;">
-        <a class="logout-btn" onclick="fazerLogout()">🚪 Sair da Conta</a>
+        <a class="logout-btn" onclick="fazerLogout()"><span class="dropdown-icon">🚪</span> Sair da Conta</a>
       </div>
     </div>
   </header>
@@ -49,72 +48,22 @@
         <button class="btn btn-secondary btn-sm">+ Criar</button>
       </div>
       <div class="chat-list">
-        <div class="chat-item active">
-          <div class="chat-item-icon">💻</div>
-          <div class="chat-item-info">
-            <h4>POO - Java</h4>
-            <p>Ana Clara: Enviei o PDF do exercício...</p>
-          </div>
-        </div>
-        <div class="chat-item">
-          <div class="chat-item-icon">📐</div>
-          <div class="chat-item-info">
-            <h4>Cálculo II</h4>
-            <p>Mateus: Alguém fez a questão 4?</p>
-          </div>
-        </div>
-        <div class="chat-item">
-          <div class="chat-item-icon">⚖️</div>
-          <div class="chat-item-info">
-            <h4>Direito Constitucional</h4>
-            <p>Gabriel: Reunião às 19h no Pomodoro</p>
-          </div>
-        </div>
+        <!-- As salas reais criadas no Supabase serão carregadas aqui dinamicamente -->
       </div>
     </aside>
 
     <main class="chat-main">
       <header class="chat-header">
         <div class="chat-header-info">
-          <h2>Programação Orientada a Objetos (POO)</h2>
-          <span class="badge-topic">Ementa: Herança, Polimorfismo e Interfaces</span>
+          <h2>Selecione uma sala</h2>
+          <span class="badge-topic">Escolha uma sala ao lado para começar</span>
         </div>
         <button class="btn btn-primary btn-sm">⏱️ Iniciar Pomodoro</button>
       </header>
 
       <div class="messages-container">
         <div class="system-message">
-          <span>Você entrou na sala de estudos de POO</span>
-        </div>
-
-        <div class="message">
-          <div class="avatar">AC</div>
-          <div class="message-content">
-            <div class="message-header">
-              <span class="user-name">Ana Clara</span>
-              <time>14:32</time>
-            </div>
-            <p>Pessoal, montei um resumo sobre Interfaces x Classes Abstratas. Quem quiser dar uma olhada, anexei o arquivo abaixo!</p>
-
-            <div class="attachment-card">
-              <div class="attachment-icon">📄</div>
-              <div class="attachment-details">
-                <strong>Resumo_Interfaces_POO.pdf</strong>
-                <span>PDF • 1.2 MB</span>
-              </div>
-              <a href="#" class="btn btn-secondary btn-sm">Baixar</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="message message-own">
-          <div class="message-content">
-            <div class="message-header">
-              <time>14:35</time>
-              <span class="user-name">Você</span>
-            </div>
-            <p>Show de bola, Ana! Estava com dúvida justamente nisso para a prova de semana que vem.</p>
-          </div>
+          <span>Selecione uma sala na barra lateral para carregar as mensagens</span>
         </div>
       </div>
 
@@ -131,46 +80,43 @@
     </main>
 
     <aside class="chat-details">
+      <!-- Botão para Sair da Sala Atual -->
+      <div class="details-section" style="padding-bottom: 0.5rem;">
+        <button class="btn btn-secondary btn-sm" style="width: 100%; color: #dc2626; border-color: #fca5a5;" onclick="sairDaSalaAtual()">🚪 Sair desta Sala</button>
+      </div>
+
       <div class="details-section">
-        <h3>Participantes (3)</h3>
+        <h3>Participantes (0)</h3>
         <ul class="user-list">
-          <li><span class="status-dot online"></span> Ana Clara</li>
-          <li><span class="status-dot online"></span> Pedro Daniel</li>
-          <li><span class="status-dot offline"></span> Lucas Silva</li>
+          <!-- Participantes reais entram aqui dinamicamente -->
         </ul>
       </div>
 
       <div class="details-section">
         <h3>Materiais Compartilhados</h3>
         <div class="shared-materials">
-          <div class="material-item">
-            <span>📄 Resumo_Interfaces.pdf</span>
-            <small>por Ana Clara</small>
-          </div>
-          <div class="material-item">
-            <span>📝 Lista_Exercicios.pdf</span>
-            <small>por Prof. Carlos</small>
-          </div>
+          <p style="font-size: 0.8rem; color: #64748b; padding: 0.5rem;">Nenhum material na sala.</p>
         </div>
       </div>
     </aside>
 
   </div>
 
-  <div id="profileModal" class="modal-overlay" style="display: none;">
+  <!-- Modal para Criar Nova Sala -->
+  <div id="criarSalaModal" class="modal-overlay" style="display: none;">
     <div class="modal-card">
-      <h3>Editar Seus Dados</h3>
-      <div style="display: flex; flex-direction: column; gap: 0.3rem;">
-        <label style="font-size: 0.85rem; font-weight: 600;">Seu Nome:</label>
-        <input type="text" id="inputName" placeholder="Nome Completo">
+      <h3>Criar Nova Sala de Estudo</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.5rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Nome da Matéria / Sala:</label>
+        <input type="text" id="inputNomeSala" placeholder="Ex: Algoritmos e Estruturas de Dados">
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.3rem;">
-        <label style="font-size: 0.85rem; font-weight: 600;">Seu Curso e Período:</label>
-        <input type="text" id="inputCourse" placeholder="Ex: Eng. Software • 4º P.">
+      <div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.8rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Tópico / Ementa:</label>
+        <input type="text" id="inputTopicoSala" placeholder="Ex: Árvores Binárias e Grafos">
       </div>
-      <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-        <button class="btn-primary" style="flex: 1;" onclick="saveProfile()">Salvar</button>
-        <button class="btn-outline" style="flex: 1;" onclick="closeProfileModal()">Cancelar</button>
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="salvarNovaSala()">Criar Sala</button>
+        <button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="fecharModalSala()">Cancelar</button>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* Correção do seletor universal de '-' para '*' */
 * {
     margin: 0;
     padding: 0;
@@ -10,12 +11,13 @@
 body {
     background-color: #f8fafc;
     color: #0f172a;
+    -webkit-font-smoothing: antialiased;
 }
 
 .navbar {
     background: #ffffff;
     border-bottom: 1px solid #e2e8f0;
-    padding: 0.75rem 2rem;
+    padding: 0.75rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,7 +33,7 @@ body {
 }
 
 .logo-area img {
-    max-width: 180px;
+    max-width: 150px;
     height: auto;
     display: block;
 }
@@ -39,14 +41,15 @@ body {
 .user-profile-container {
     position: relative;
     display: inline-block;
+    cursor: pointer;
 }
 
 .user-avatar-wrapper {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     cursor: pointer;
-    padding: 0.35rem 0.6rem;
+    padding: 0.35rem 0.5rem;
     border-radius: 8px;
     transition: background-color 0.2s;
 }
@@ -66,6 +69,7 @@ body {
     justify-content: center;
     font-weight: 700;
     font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .user-info-brief {
@@ -94,7 +98,7 @@ body {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 180px;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     z-index: 1000;
     flex-direction: column;
     gap: 0.25rem;
@@ -105,36 +109,35 @@ body {
 }
 
 .profile-dropdown a {
-    padding: 0.5rem 0.75rem;
+    padding: 0.6rem 1rem;
     font-size: 0.85rem;
     color: #334155;
     text-decoration: none;
-    border-radius: 6px;
     transition: background-color 0.2s;
     cursor: pointer;
 }
 
 .profile-dropdown a:hover {
-    background-color: #e0e7ff;
+    background-color: #f1f5f9;
     color: #4f46e5;
 }
 
-.profile-dropdown .logout-btn {
+.profile-dropdown a.logout-btn {
     color: #ef4444;
 }
 
-.profile-dropdown .logout-btn:hover {
+.profile-dropdown a.logout-btn:hover {
     background-color: #fee2e2;
     color: #dc2626;
 }
 
 .main-container {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
     padding: 0 1rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-tabs {
@@ -142,6 +145,13 @@ body {
     gap: 0.5rem;
     border-bottom: 2px solid #e2e8f0;
     padding-bottom: 0.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-tabs::-webkit-scrollbar {
+    display: none; /* Oculta a barra de rolagem no mobile mantendo a funcionalidade */
 }
 
 .tab-btn {
@@ -153,6 +163,7 @@ body {
     cursor: pointer;
     border-radius: 6px;
     transition: all 0.2s;
+    flex-shrink: 0;
 }
 
 .tab-btn.active, .tab-btn:hover {
@@ -166,15 +177,9 @@ body {
     gap: 1.5rem;
 }
 
-@media (max-width: 768px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 .card {
     background: #ffffff;
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     border: 1px solid #e2e8f0;
@@ -187,10 +192,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .card-header h3 {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: #0f172a;
 }
 
@@ -207,6 +213,7 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    white-space: nowrap;
 }
 
 .btn-primary:hover {
@@ -223,6 +230,7 @@ body {
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 .btn-outline:hover {
@@ -238,16 +246,27 @@ body {
     background: #f8fafc;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
+    gap: 1rem;
+}
+
+.item-info {
+    overflow: hidden;
 }
 
 .item-info h4 {
     font-size: 0.95rem;
     color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-info p {
     font-size: 0.8rem;
     color: #64748b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tab-content {
@@ -268,6 +287,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 1rem;
 }
 
 .modal-overlay.active {
@@ -276,63 +296,66 @@ body {
 
 .modal-card {
     background: white;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 12px;
     width: 100%;
     max-width: 400px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .modal-card input {
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
 }
 
-.user-profile-container {
-    position: relative;
-    cursor: pointer;
-}
+/* --- Ajustes Específicos para Mobile (< 768px) --- */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.6rem 1rem;
+    }
 
-.user-avatar-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
+    .logo-area img {
+        max-width: 120px;
+    }
 
-.profile-dropdown {
-    display: none;
-    position: absolute;
-    top: 110%;
-    right: 0;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    min-width: 180px;
-    z-index: 1000;
-    padding: 0.5rem 0;
-}
+    /* Oculta o curso do cabeçalho no celular para economizar espaço horizontal */
+    .user-course {
+        display: none;
+    }
 
-.profile-dropdown.show {
-    display: flex;
-    flex-direction: column;
-}
+    .main-container {
+        margin: 1rem auto;
+        padding: 0 0.75rem;
+        gap: 1rem;
+    }
 
-.profile-dropdown a {
-    padding: 0.6rem 1rem;
-    color: #334155;
-    text-decoration: none;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 
-.profile-dropdown a:hover {
-    background-color: #f1f5f9;
-}
+    .card {
+        padding: 1rem;
+    }
 
-.profile-dropdown a.logout-btn {
-    color: #ef4444;
+    /* Empilha elementos de itens caso fiquem apertados no celular */
+    .match-item, .room-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .match-item .btn-outline, 
+    .match-item .btn-primary,
+    .room-item .btn-outline, 
+    .room-item .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
 }

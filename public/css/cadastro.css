@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-
+/* Corrigido o seletor universal de '-' para '*' */
 * {
   margin: 0;
   padding: 0;
@@ -13,11 +13,11 @@ input, button, select, textarea {
 }
 
 .auth-container {
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   background-color: #f8fafc;
 }
 
@@ -106,4 +106,35 @@ input, button, select, textarea {
 
 .auth-footer a:hover {
   text-decoration: underline;
+}
+
+/* --- Ajustes para Celulares --- */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-card {
+    padding: 1.5rem 1.25rem;
+    gap: 1rem;
+    border-radius: 10px;
+  }
+
+  .auth-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .auth-card > p {
+    font-size: 0.85rem;
+  }
+
+  .input-group input {
+    padding: 0.7rem 0.85rem;
+    font-size: 16px; /* Evita o zoom automático no iOS ao focar no campo */
+  }
+
+  .auth-card .btn-primary {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
 }
