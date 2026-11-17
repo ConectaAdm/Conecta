@@ -49,7 +49,7 @@ Abra http://localhost:3000 (ou a porta definida no console).
 ## Acesso Online
 
 Visite o site do [Conecta](https://conecta-phi-five.vercel.app/) para mais informações.
-<<<<<<<
+
 
 ---
 
