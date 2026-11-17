@@ -44,3 +44,24 @@ Bash
 node server.js
 Acessar no navegador:
 Abra http://localhost:3000 (ou a porta definida no console).
+
+```
+## Acesso Online
+
+Visite o site do [Conecta](https://conecta-phi-five.vercel.app/) para mais informações.
+
+---
+
+## 📲 PWA (Progressive Web App)
+
+O CONECTA pode ser instalado como aplicativo no celular e no computador.
+
+* **`public/manifest.json`** — nome, cores e ícones do app.
+* **`public/sw.js`** — service worker: guarda CSS/JS/imagens em cache e mantém as páginas já visitadas disponíveis offline.
+* **`public/js/pwa.js`** — registra o service worker e mostra o botão "Instalar app".
+* **`public/offline.html`** — tela exibida quando não há internet.
+* **`public/icons/`** — ícones do app.
+
+**Como instalar:** no Chrome/Edge, clique em "📲 Instalar app" ou no ícone de instalação da barra de endereço. No iPhone (Safari): Compartilhar → "Adicionar à Tela de Início".
+
+> Ao publicar mudanças em CSS/JS, aumente `CACHE_VERSION` em `public/sw.js` (ex.: `v1` → `v2`) para os usuários receberem a versão nova.
