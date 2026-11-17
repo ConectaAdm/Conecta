@@ -11,6 +11,7 @@ const app = express();
 const port = 3000;
 
 
+<<<<<<< HEAD
 // PWA: o service worker (sw.js) nunca deve ficar preso no cache do navegador,
 // senão os usuários demoram a receber as atualizações do app.
 app.get('/sw.js', (req, res) => {
@@ -25,6 +26,8 @@ app.get('/manifest.json', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'manifest.json'));
 });
 
+=======
+>>>>>>> 3c822b6e3bd92bfcd9a2358974cb4a435dd75097
 // Configura o Express para servir arquivos estáticos (como CSS, imagens, JavaScript do cliente) a partir da pasta 'public'
 app.use(express.static('public'));
 

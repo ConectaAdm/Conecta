@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONECTA - Sala de Foco & Pomodoro</title>
+
+  <!-- Caminhos corretos para o CSS -->
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/perfil.css">
+  <link rel="stylesheet" href="../css/pomodoro.css">
+
+  <!-- SDK do Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Importa o JS do pomodoro -->
+  <script type="module" src="../js/pomodoro.js" defer></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo" style="max-height: 50px;">
+    </div>
+
+    <!-- Links de navegação atualizados -->
+    <nav class="nav-links">
+      <a href="/dashboard">Início & Matches</a>
+      <a href="/chat">Salas de Estudo</a>
+      <a href="/materiais">Materiais</a>
+      <a href="/pomodoro" class="active">Foco Pomodoro</a>
+    </nav>
+
+    <div class="user-profile-container">
+      <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
+        <div id="userAvatarInitials" class="user-avatar">--</div>
+        <div class="user-info-brief">
+          <span id="headerUserName" class="user-name">Carregando...</span>
+          <span id="headerUserCourse" class="user-course">...</span>
+        </div>
+      </div>
+
+      <!-- Menu de perfil idêntico ao modelo de referência -->
+      <div id="profileMenu" class="profile-dropdown">
+        <a onclick="window.location.href='/perfil'"><span class="dropdown-icon">⚙️</span> Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')"><span class="dropdown-icon">🔒</span> Configurações</a>
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0.25rem 0;">
+        <a class="logout-btn" onclick="fazerLogout()"><span class="dropdown-icon">🚪</span> Sair da Conta</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pomodoro-container">
+    <section class="pomodoro-main-card">
+      <div class="pomodoro-modes">
+        <button class="mode-btn active" data-mode="foco" data-time="25">🧠 Foco (25m)</button>
+        <button class="mode-btn" data-mode="pausa-curta" data-time="5">☕ Pausa Curta (5m)</button>
+        <button class="mode-btn" data-mode="pausa-longa" data-time="15">🌴 Pausa Longa (15m)</button>
+      </div>
+
+      <div class="timer-display">
+        <h1 id="timer-text">25:00</h1>
+        <p class="timer-status" id="timer-status">Hora de se concentrar!</p>
+      </div>
+
+      <div class="timer-controls">
+        <button class="btn btn-primary btn-lg" id="start-btn">Iniciar</button>
+        <button class="btn btn-secondary btn-lg" id="reset-btn">Reiniciar</button>
+      </div>
+
+      <div class="cycle-tracker">
+        <span>Ciclos concluídos:</span>
+        <div class="cycle-dots" id="cycle-dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+
+      <div class="sound-section">
+        <h3>🎧 Sons Ambiente</h3>
+        <div class="sound-options">
+          <button class="sound-btn" data-sound="chuva">🌧️ Chuva</button>
+          <button class="sound-btn" data-sound="lofi">☕ Café / Lo-Fi</button>
+          <button class="sound-btn" data-sound="ondas">🌊 Ondas</button>
+          <button class="sound-btn active" data-sound="mudo">🔇 Mudo</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="pomodoro-todo-card">
+      <div class="todo-header">
+        <h3>📝 Tarefas da Sessão</h3>
+        <span class="badge-topic">Meta do dia</span>
+      </div>
+
+      <form class="todo-form" id="todo-form">
+        <input type="text" id="todo-input" placeholder="Adicionar tarefa..." required>
+        <button type="submit" class="btn btn-primary">+</button>
+      </form>
+
+      <ul class="todo-list" id="todo-list"></ul>
+    </aside>
+  </main>
+</body>
+</html>

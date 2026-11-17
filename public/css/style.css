@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Correção do seletor universal de '-' para '*' */
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +11,7 @@
 body {
   background-color: #f8fafc;
   color: #1e293b;
+  -webkit-font-smoothing: antialiased;
 }
 
 .navbar {
@@ -29,6 +33,11 @@ body {
   color: #4f46e5;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 nav a {
   margin: 0 15px;
   text-decoration: none;
@@ -46,6 +55,9 @@ nav a:hover {
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .btn-login {
@@ -85,6 +97,7 @@ nav a:hover {
   display: flex;
   justify-content: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .features {
@@ -110,4 +123,50 @@ nav a:hover {
 .card p {
   color: #64748b;
   font-size: 0.9rem;
+}
+
+/* --- Ajustes Responsivos para Celular (< 768px) --- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 5%;
+  }
+
+  /* Compacta os links do menu principal ou oculta se preferir depois */
+  nav a {
+    margin: 0 8px;
+    font-size: 0.85rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .hero {
+    padding: 3rem 1rem 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .features {
+    padding: 1.5rem 5%;
+  }
+
+  .btn-login {
+    margin-right: 5px;
+  }
 }

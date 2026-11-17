@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONECTA - Repositório de Materiais</title>
+  <link rel="stylesheet" href="../css/materiais.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <!-- Navbar Superior Padronizada -->
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
+    </div>
+
+    <!-- Área de Perfil -->
+    <div class="user-profile-container">
+      <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
+        <div id="userAvatarInitials" class="user-avatar">PD</div>
+        <div class="user-info-brief">
+          <span id="headerUserName" class="user-name">Pedro Daniel</span>
+          <span id="headerUserCourse" class="user-course">Eng. Software • 4º P.</span>
+        </div>
+      </div>
+
+      <div id="profileMenu" class="profile-dropdown">
+        <a onclick="openProfileModal()">⚙️ Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')">🔒 Configurações</a>
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0.25rem 0;">
+        <a class="logout-btn" onclick="fazerLogout()">🚪 Sair da Conta</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="materials-container">
+    
+    <div class="materials-header">
+      <div>
+        <h1>Repositório de Materiais</h1>
+        <p>Acesse resumos, provas antigas e anotações compartilhados por universitários.</p>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">+ Enviar Material</button>
+    </div>
+
+    <div class="search-filter-bar">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Buscar por disciplina, resumo, professor ou tópico...">
+      </div>
+      
+      <div class="filters-wrapper">
+        <select class="filter-select">
+          <option value="">Todas as Disciplinas</option>
+          <option value="poo">Programação Orientada a Objetos</option>
+          <option value="calculo2">Cálculo II</option>
+          <option value="direito">Direito Constitucional</option>
+        </select>
+
+        <select class="filter-select">
+          <option value="">Tipo de Conteúdo</option>
+          <option value="resumo">Resumo / Anotação</option>
+          <option value="prova">Prova Antiga</option>
+          <option value="exercicio">Lista de Exercícios</option>
+        </select>
+
+        <select class="filter-select">
+          <option value="">Instituição</option>
+          <option value="univassouras">Univassouras</option>
+          <option value="ufrj">UFRJ</option>
+          <option value="usp">USP</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="materials-grid">
+
+      <div class="material-card">
+        <div class="material-card-header">
+          <span class="file-tag pdf">PDF</span>
+          <span class="institution-tag">Univassouras</span>
+        </div>
+        <h3>Resumo de Herança, Interfaces e Polimorfismo</h3>
+        <p class="discipline-name">Programação Orientada a Objetos (POO)</p>
+        <div class="material-meta">
+          <span>Enviado por <strong>Mariana S.</strong> (ADS)</span>
+          <div class="stats">
+            <span>📥 142 downloads</span>
+            <span>⭐ 4.9</span>
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <button class="btn btn-secondary btn-full">Baixar Arquivo</button>
+        </div>
+      </div>
+
+      <div class="material-card">
+        <div class="material-card-header">
+          <span class="file-tag pdf">PDF</span>
+          <span class="institution-tag">UFRJ</span>
+        </div>
+        <h3>Gabarito Lista 3 - Integrais Duplas e Triplas</h3>
+        <p class="discipline-name">Cálculo II</p>
+        <div class="material-meta">
+          <span>Enviado por <strong>Lucas M.</strong> (Eng. Civil)</span>
+          <div class="stats">
+            <span>📥 89 downloads</span>
+            <span>⭐ 4.8</span>
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <button class="btn btn-secondary btn-full">Baixar Arquivo</button>
+        </div>
+      </div>
+
+      <div class="material-card">
+        <div class="material-card-header">
+          <span class="file-tag docx">DOCX</span>
+          <span class="institution-tag">USP</span>
+        </div>
+        <h3>Esquema Visual - Controle de Constitucionalidade</h3>
+        <p class="discipline-name">Direito Constitucional</p>
+        <div class="material-meta">
+          <span>Enviado por <strong>Beatriz C.</strong> (Direito)</span>
+          <div class="stats">
+            <span>📥 210 downloads</span>
+            <span>⭐ 5.0</span>
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <button class="btn btn-secondary btn-full">Baixar Arquivo</button>
+        </div>
+      </div>
+
+      <div class="material-card">
+        <div class="material-card-header">
+          <span class="file-tag pdf">PDF</span>
+          <span class="institution-tag">Univassouras</span>
+        </div>
+        <h3>Prova A1 Corrigida (2025.2) - Prof. Carlos</h3>
+        <p class="discipline-name">Estrutura de Dados</p>
+        <div class="material-meta">
+          <span>Enviado por <strong>Pedro Daniel</strong> (Eng. Soft)</span>
+          <div class="stats">
+            <span>📥 67 downloads</span>
+            <span>⭐ 4.7</span>
+          </div>
+        </div>
+        <div class="material-card-footer">
+          <button class="btn btn-secondary btn-full">Baixar Arquivo</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="uploadModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Compartilhar Novo Material</h3>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <form class="modal-form">
+        <div class="form-group">
+          <label>Título do Material</label>
+          <input type="text" placeholder="Ex: Resumo de Árvores Binárias" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Disciplina</label>
+            <input type="text" placeholder="Ex: Estrutura de Dados" required>
+          </div>
+          <div class="form-group">
+            <label>Tipo de Material</label>
+            <select required>
+              <option value="">Selecione...</option>
+              <option value="resumo">Resumo / Anotação</option>
+              <option value="prova">Prova Antiga</option>
+              <option value="exercicio">Exercícios</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Arquivo (PDF, DOCX, ZIP)</label>
+          <div class="file-drop-area">
+            <span>📄 Arraste seu arquivo aqui ou <strong>clique para buscar</strong></span>
+            <input type="file" required hidden id="modalFileInput">
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Enviar e Publicar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="profileModal" class="modal-overlay">
+    <div class="modal-card">
+      <h3>Editar Seus Dados</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Seu Nome:</label>
+        <input type="text" id="inputName" value="Pedro Daniel">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Seu Curso e Período:</label>
+        <input type="text" id="inputCourse" value="Eng. Software • 4º P.">
+      </div>
+      <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+        <button class="btn-primary" style="flex: 1;" onclick="saveProfile()">Salvar</button>
+        <button class="btn-outline" style="flex: 1;" onclick="closeProfileModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/dashboards.js"></script>
+  <script>
+    function openModal() {
+      document.getElementById('uploadModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('uploadModal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

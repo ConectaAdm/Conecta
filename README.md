@@ -49,6 +49,7 @@ Abra http://localhost:3000 (ou a porta definida no console).
 ## Acesso Online
 
 Visite o site do [Conecta](https://conecta-phi-five.vercel.app/) para mais informações.
+<<<<<<< HEAD
 
 ---
 
@@ -65,3 +66,5 @@ O CONECTA pode ser instalado como aplicativo no celular e no computador.
 **Como instalar:** no Chrome/Edge, clique em "📲 Instalar app" ou no ícone de instalação da barra de endereço. No iPhone (Safari): Compartilhar → "Adicionar à Tela de Início".
 
 > Ao publicar mudanças em CSS/JS, aumente `CACHE_VERSION` em `public/sw.js` (ex.: `v1` → `v2`) para os usuários receberem a versão nova.
+=======
+>>>>>>> 3c822b6e3bd92bfcd9a2358974cb4a435dd75097

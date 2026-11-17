@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONECTA - Chat de Estudos</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/chat.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/chat.js" defer></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
+    </div>
+
+    <nav class="nav-links">
+      <a href="/dashboard">Início & Matches</a>
+      <a href="/chat" class="active">Salas de Estudo</a>
+      <a href="/materiais">Materiais</a>
+    </nav>
+
+    <div class="user-profile-container">
+      <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
+        <div id="userAvatarInitials" class="user-avatar">--</div>
+        <div class="user-info-brief">
+          <span id="headerUserName" class="user-name">Carregando...</span>
+          <span id="headerUserCourse" class="user-course">...</span>
+        </div>
+      </div>
+
+      <div id="profileMenu" class="profile-dropdown">
+        <a onclick="window.location.href='/perfil'"><span class="dropdown-icon">⚙️</span> Meu Perfil</a>
+        <a onclick="alert('Configurações em desenvolvimento.')"><span class="dropdown-icon">🔒</span> Configurações</a>
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0.25rem 0;">
+        <a class="logout-btn" onclick="fazerLogout()"><span class="dropdown-icon">🚪</span> Sair da Conta</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="chat-layout">
+    
+    <aside class="chat-sidebar">
+      <div class="sidebar-header">
+        <h3>Minhas Salas</h3>
+        <button class="btn btn-secondary btn-sm">+ Criar</button>
+      </div>
+      <div class="chat-list">
+        <!-- As salas reais criadas no Supabase serão carregadas aqui dinamicamente -->
+      </div>
+    </aside>
+
+    <main class="chat-main">
+      <header class="chat-header">
+        <div class="chat-header-info">
+          <h2>Selecione uma sala</h2>
+          <span class="badge-topic">Escolha uma sala ao lado para começar</span>
+        </div>
+        <button class="btn btn-primary btn-sm">⏱️ Iniciar Pomodoro</button>
+      </header>
+
+      <div class="messages-container">
+        <div class="system-message">
+          <span>Selecione uma sala na barra lateral para carregar as mensagens</span>
+        </div>
+      </div>
+
+      <footer class="chat-footer">
+        <form class="chat-input-area">
+          <label for="file-upload" class="btn-attach" title="Anexar Material">
+            📎
+            <input type="file" id="file-upload" hidden>
+          </label>
+          <input type="text" placeholder="Escreva sua dúvida ou mensagem..." required>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </footer>
+    </main>
+
+    <aside class="chat-details">
+      <!-- Botão para Sair da Sala Atual -->
+      <div class="details-section" style="padding-bottom: 0.5rem;">
+        <button class="btn btn-secondary btn-sm" style="width: 100%; color: #dc2626; border-color: #fca5a5;" onclick="sairDaSalaAtual()">🚪 Sair desta Sala</button>
+      </div>
+
+      <div class="details-section">
+        <h3>Participantes (0)</h3>
+        <ul class="user-list">
+          <!-- Participantes reais entram aqui dinamicamente -->
+        </ul>
+      </div>
+
+      <div class="details-section">
+        <h3>Materiais Compartilhados</h3>
+        <div class="shared-materials">
+          <p style="font-size: 0.8rem; color: #64748b; padding: 0.5rem;">Nenhum material na sala.</p>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Modal para Criar Nova Sala -->
+  <div id="criarSalaModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <h3>Criar Nova Sala de Estudo</h3>
+      <div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.5rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Nome da Matéria / Sala:</label>
+        <input type="text" id="inputNomeSala" placeholder="Ex: Algoritmos e Estruturas de Dados">
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.8rem;">
+        <label style="font-size: 0.85rem; font-weight: 600;">Tópico / Ementa:</label>
+        <input type="text" id="inputTopicoSala" placeholder="Ex: Árvores Binárias e Grafos">
+      </div>
+      <div style="display: flex; gap: 0.5rem;">
+        <button class="btn btn-primary btn-sm" style="flex: 1;" onclick="salvarNovaSala()">Criar Sala</button>
+        <button class="btn btn-secondary btn-sm" style="flex: 1;" onclick="fecharModalSala()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
