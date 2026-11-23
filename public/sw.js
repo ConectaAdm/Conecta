@@ -8,7 +8,7 @@
 // IMPORTANTE: sempre que alterar arquivos de CSS/JS/HTML e quiser
 // que os usuários recebam a versão nova, aumente o número abaixo.
 // =============================================================
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const STATIC_CACHE = `conecta-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `conecta-runtime-${CACHE_VERSION}`;
 
