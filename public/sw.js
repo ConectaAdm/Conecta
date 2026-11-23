@@ -8,7 +8,7 @@
 // IMPORTANTE: sempre que alterar arquivos de CSS/JS/HTML e quiser
 // que os usuários recebam a versão nova, aumente o número abaixo.
 // =============================================================
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const STATIC_CACHE = `conecta-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `conecta-runtime-${CACHE_VERSION}`;
 
@@ -28,6 +28,7 @@ const PRECACHE_URLS = [
   '/css/materiais.css',
   '/css/perfil.css',
   '/css/pomodoro.css',
+  '/css/responsive.css',
   '/assets/CONECTA-LOGO.png',
   '/icons/icon-192.png',
   '/icons/icon-512.png',

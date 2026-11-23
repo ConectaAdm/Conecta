@@ -1,0 +1,474 @@
+/* Impede que o iOS aumente o texto sozinho ao girar o celular */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Nenhuma imagem passa da largura do seu container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Links de navegação do cabeçalho.
+   Antes só existiam no chat.css, por isso apareciam sem estilo
+   (azuis e sublinhados) nas páginas de Perfil e Pomodoro. */
+:where(.nav-links) {
+  display: flex;
+  align-items: center;
+}
+
+:where(.nav-links) a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #475569;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+:where(.nav-links) a:hover {
+  color: #4f46e5;
+}
+
+:where(.nav-links) a.active {
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+/* Container e título usados pela página de Perfil, que não carrega o
+   materiais.css. O :where() tem especificidade zero, então onde o
+   materiais.css existe, ele continua mandando. */
+:where(.materials-container) {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+:where(.materials-header) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+:where(.materials-header) h1 {
+  font-size: 1.8rem;
+  color: #0f172a;
+}
+
+:where(.materials-header) p {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* Em grids e flex, itens com textos longos podiam "empurrar" a página
+   para fora da tela. min-width: 0 deixa o item encolher. */
+.dashboard-grid > *,
+.pomodoro-container > *,
+.profile-grid > *,
+.main-container > *,
+.chat-main,
+.item-info,
+.chat-header-info {
+  min-width: 0;
+}
+
+
+/* Selects da página de Perfil estavam no estilo padrão do navegador */
+.profile-grid select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #334155;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.profile-grid select:focus {
+  border-color: #4f46e5;
+}
+
+/* Aviso "Selecione uma sala..." do chat quebra em linhas sem ficar torto */
+.system-message span {
+  display: inline-block;
+  line-height: 1.4;
+}
+
+
+/* ---------------------------------------------------------------------
+   2. BOTÕES
+   Login, Chat, Perfil, Materiais e Pomodoro usam .btn / .btn-secondary /
+   .btn-sm, mas nem todas as páginas tinham esses estilos (por isso o
+   botão "Entrar" e o "+ Adicionar" apareciam cinza, no padrão do navegador).
+   O :where() deixa estas regras com especificidade zero: elas só
+   preenchem o que falta e NUNCA sobrescrevem o estilo próprio de uma
+   página (ex.: .btn-lg do Pomodoro, .btn-block do Login).
+   --------------------------------------------------------------------- */
+:where(.btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+:where(.btn-primary) {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+:where(.btn-primary):hover {
+  background-color: #4338ca;
+}
+
+:where(.btn-secondary) {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+:where(.btn-secondary):hover {
+  background-color: #c7d2fe;
+}
+
+:where(.btn-sm) {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+:where(.btn-full, .btn-block) {
+  width: 100%;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. CELULAR / TABLET (até 768px)
+   --------------------------------------------------------------------- */
+@media (max-width: 768px) {
+
+  /* ===== Cabeçalho (todas as páginas) =====
+     Linha 1: logo + perfil (ou Entrar/Cadastrar na página inicial)
+     Linha 2: links de navegação, com rolagem lateral se não couberem */
+  .navbar {
+    flex-wrap: wrap;
+    gap: 0.6rem 0.75rem;
+    height: auto;              /* o chat.css fixava 60px de altura */
+    padding: 0.6rem 1rem;
+  }
+
+  .logo-area img,
+  .navbar > img {
+    width: auto;
+    max-width: 140px;
+    max-height: 52px;
+  }
+
+  .navbar > nav {
+    order: 3;                  /* joga a navegação para a segunda linha */
+    width: 100%;
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .navbar > nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar > nav a {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    background-color: #f1f5f9;
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .navbar > nav a.active {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+    font-weight: 700;
+  }
+
+  /* Página inicial: botões Entrar / Cadastrar lado a lado */
+  .auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .auth-buttons .btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .btn-login {
+    margin-right: 0;
+  }
+
+  /* Nome do usuário não empurra o cabeçalho para fora da tela */
+  .user-info-brief {
+    max-width: 130px;
+    min-width: 0;
+  }
+
+  .user-name {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .profile-dropdown {
+    max-width: calc(100vw - 2rem);
+  }
+
+  /* ===== Página inicial ===== */
+  .hero {
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    padding: 1rem 1.25rem 2rem;
+  }
+
+  /* ===== Painel (dashboard) ===== */
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card h2 {
+    font-size: 1.3rem;
+    line-height: 1.3;
+  }
+
+  .card-header {
+    flex-wrap: wrap;
+  }
+
+  .card-header .btn-outline,
+  .card .btn-primary,
+  .card .btn-outline {
+    white-space: normal;       /* textos longos quebram em vez de vazar */
+  }
+
+  .item-info,
+  .match-item .item-info {
+    width: 100%;
+  }
+
+  .tab-btn {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  /* ===== Títulos de página (Materiais e Perfil) ===== */
+  .materials-container {
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  .materials-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .materials-header h1 {
+    font-size: 1.45rem;
+    line-height: 1.25;
+  }
+
+  .materials-header .btn {
+    width: 100%;
+  }
+
+  /* ===== Chat / Salas de Estudo =====
+     Antes a lista de salas sumia no celular e não havia como escolher
+     uma sala. Agora ela vira uma faixa com rolagem lateral acima do chat,
+     e os detalhes da sala (participantes, materiais, sair) ficam abaixo. */
+  .chat-layout {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .chat-sidebar {
+    display: flex;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .sidebar-header {
+    padding: 0.75rem 1rem 0.25rem;
+    border-bottom: none;
+  }
+
+  .sidebar-header h3 {
+    font-size: 0.95rem;
+  }
+
+  .chat-list {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 1rem 0.75rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .chat-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chat-item {
+    flex: 0 0 auto;
+    max-width: 230px;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: #ffffff;
+  }
+
+  .chat-item-info p {
+    max-width: 150px;
+  }
+
+  .chat-main {
+    height: 72vh;              /* reserva para navegadores antigos */
+    height: 72dvh;             /* desconta a barra de endereço do celular */
+    min-height: 420px;
+  }
+
+  .chat-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .chat-header h2 {
+    font-size: 1.15rem;
+  }
+
+  .chat-input-area input[type="text"] {
+    min-width: 0;
+  }
+
+  .chat-details {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  /* ===== Pomodoro ===== */
+  .pomodoro-container {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0 1rem;
+    margin: 1rem auto 1.5rem;
+    gap: 1rem;
+  }
+
+  .todo-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Campo de tarefa encolhe para o botão "+" caber dentro do cartão */
+  .todo-form input {
+    min-width: 0;
+  }
+
+  .todo-form button {
+    flex-shrink: 0;
+  }
+
+  /* ===== Formulários =====
+     Campos com fonte menor que 16px fazem o iPhone dar zoom ao tocar */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  /* ===== Modais ===== */
+  .modal-card,
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* ===== Login e Cadastro ===== */
+  .auth-page {
+    padding: 1rem;
+  }
+
+  .auth-container {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .form-options {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Botão "Instalar app" do PWA não cobre o conteúdo do fim da página
+     (só quando o botão está na tela) */
+  body:has(#pwa-install-btn) {
+    padding-bottom: 4.5rem;
+  }
+}
+
+
+/* ---------------------------------------------------------------------
+   4. CELULAR PEQUENO (até 400px)
+   --------------------------------------------------------------------- */
+@media (max-width: 400px) {
+  .user-info-brief {
+    max-width: 90px;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .timer-display h1 {
+    font-size: 3.2rem;
+  }
+
+  .mode-btn {
+    font-size: 0.75rem;
+  }
+}
