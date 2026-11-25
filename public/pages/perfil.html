@@ -3,105 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CONECTA - Perfil & Configurações de Estudo</title>
-  
+  <title>CONECTA - Perfil &amp; Configurações de Estudo</title>
+
   <link rel="stylesheet" href="../css/perfil.css">
   <link rel="stylesheet" href="../css/dashboard.css">
   <!-- Responsividade (celular/tablet): deve ser o último CSS -->
   <link rel="stylesheet" href="/css/responsive.css">
+
   <!-- SDK do Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Script específico do Perfil -->
   <script src="../js/perfil.js" defer></script>
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#4f46e5">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="CONECTA">
-    <script src="/js/pwa.js" defer></script>
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="CONECTA">
+  <script src="/js/pwa.js" defer></script>
 </head>
 <body>
-
   <header class="navbar">
     <div class="logo-area">
-      <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
+      <a href="/dashboard" aria-label="Ir para o início da CONECTA">
+        <img src="../assets/CONECTA-LOGO.png" alt="CONECTA Logo">
+      </a>
     </div>
 
-    <nav class="nav-links">
-      <a href="/dashboard">Início & Matches</a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="/dashboard">Início &amp; Matches</a>
       <a href="/chat">Salas de Estudo</a>
       <a href="/materiais">Materiais</a>
     </nav>
 
     <div class="user-profile-container">
-      <div class="user-avatar-wrapper" onclick="toggleProfileMenu()">
-        <div id="userAvatarInitials" class="user-avatar">--</div>
-        <div class="user-info-brief">
+      <button
+        type="button"
+        id="profileMenuTrigger"
+        class="user-avatar-wrapper"
+        aria-expanded="false"
+        aria-controls="profileMenu"
+        aria-haspopup="menu"
+      >
+        <span id="userAvatarInitials" class="user-avatar">--</span>
+        <span class="user-info-brief">
           <span id="headerUserName" class="user-name">Carregando...</span>
           <span id="headerUserCourse" class="user-course">...</span>
-        </div>
-      </div>
+        </span>
+      </button>
 
-      <div id="profileMenu" class="profile-dropdown">
-        <a onclick="openProfileModal()"><span class="dropdown-icon">⚙️</span> Meu Perfil</a>
-        <a onclick="alert('Configurações em desenvolvimento.')"><span class="dropdown-icon">🔒</span> Configurações</a>
+      <div id="profileMenu" class="profile-dropdown" role="menu" aria-labelledby="profileMenuTrigger" hidden>
+        <button type="button" id="openProfileModalMenuBtn" class="dropdown-item" role="menuitem">
+          <span class="dropdown-icon" aria-hidden="true">⚙️</span>
+          <span>Meu Perfil</span>
+        </button>
+        <button type="button" id="openSettingsBtn" class="dropdown-item" role="menuitem">
+          <span class="dropdown-icon" aria-hidden="true">🔒</span>
+          <span>Configurações</span>
+        </button>
         <hr class="dropdown-divider">
-        <a class="logout-btn" onclick="fazerLogout()"><span class="dropdown-icon">🚪</span> Sair da Conta</a>
+        <button type="button" id="logoutBtn" class="dropdown-item logout-btn" role="menuitem">
+          <span class="dropdown-icon" aria-hidden="true">🚪</span>
+          <span>Sair da Conta</span>
+        </button>
       </div>
     </div>
   </header>
 
-  <main class="materials-container">
-
-    <div class="materials-header">
+  <main class="profile-container" id="mainContent">
+    <div class="profile-header">
       <div>
-        <h1>Perfil do Estudante & Configurações</h1>
+        <h1>Perfil do Estudante &amp; Configurações</h1>
         <p>Gerencie suas preferências de estudo, visibilidade de perfil e tópicos de interesse.</p>
       </div>
-      <button class="btn btn-primary" onclick="openProfileModal()">✏️ Editar Dados do Perfil</button>
+      <button type="button" id="openProfileModalBtn" class="btn btn-primary">
+        <span aria-hidden="true">✏️</span>
+        <span>Editar Dados do Perfil</span>
+      </button>
     </div>
 
-    <div class="profile-grid">
+    <div id="feedbackBanner" class="feedback-banner" role="status" aria-live="polite" hidden></div>
 
-      <div class="card card-summary">
-        <div class="card-avatar" id="cardAvatarInitials">--</div>
+    <div class="profile-grid">
+      <aside class="card card-summary" aria-label="Resumo do perfil">
+        <div class="card-avatar" id="cardAvatarInitials" aria-hidden="true">--</div>
         <h2 class="card-title" id="cardUserName">Carregando...</h2>
         <p class="card-subtitle" id="cardUserCourse">...</p>
-        <span class="institution-tag">Univassouras</span>
+        <span id="cardInstitutionTag" class="institution-tag">Univassouras</span>
 
         <hr class="card-divider">
 
         <div class="card-stats">
           <div>
-            <strong class="stat-number">12</strong>
+            <strong id="statMaterialsCount" class="stat-number">--</strong>
             <span class="stat-label">Materiais</span>
           </div>
           <div>
-            <strong class="stat-number">4.8</strong>
+            <strong id="statRatingAverage" class="stat-number">--</strong>
             <span class="stat-label">Avaliação</span>
           </div>
           <div>
-            <strong class="stat-number">3</strong>
+            <strong id="statActiveRooms" class="stat-number">--</strong>
             <span class="stat-label">Salas Ativas</span>
           </div>
         </div>
-      </div>
+      </aside>
 
       <div class="profile-main-content">
-        
-        <div class="card">
+        <section class="card" aria-labelledby="preferencesHeading">
           <div class="card-header">
-            <h3>🎯 Preferências de Estudo & Matches</h3>
+            <h2 id="preferencesHeading">🎯 Preferências de Estudo &amp; Matches</h2>
           </div>
-          
-          <form class="form-group" onsubmit="event.preventDefault();">
-            <div>
-              <label class="form-label">Objetivo de Estudo Principal</label>
-              <select class="filter-select full-width">
+
+          <form id="preferencesForm" class="form-group" novalidate>
+            <div class="form-field">
+              <label for="studyGoalSelect" class="form-label">Objetivo de Estudo Principal</label>
+              <select id="studyGoalSelect" name="study_goal" class="filter-select full-width">
                 <option value="provas">Preparação para Provas / A1 e A2</option>
                 <option value="projetos">Projetos Práticos e Portfólio</option>
                 <option value="revisao">Revisão Geral e Monitoria</option>
@@ -109,81 +130,101 @@
               </select>
             </div>
 
-            <div>
-              <label class="form-label">Formato Favorito de Grupo</label>
-              <select class="filter-select full-width">
+            <div class="form-field">
+              <label for="groupFormatSelect" class="form-label">Formato Favorito de Grupo</label>
+              <select id="groupFormatSelect" name="group_format" class="filter-select full-width">
                 <option value="online">Online (Google Meet / Discord)</option>
                 <option value="presencial">Presencial no Campus</option>
                 <option value="hibrido">Híbrido</option>
               </select>
             </div>
- 
-            <div>
-              <label class="form-label">Disciplinas e Tópicos de Interesse</label>
 
+            <div class="form-field">
+              <label for="tagInput" class="form-label">Disciplinas e Tópicos de Interesse</label>
               <!-- Container limpo para carregar as tags salvas dinamicamente via JS -->
-              <div class="tags-container" id="tagsContainer">
-                <!-- As tags são injetadas dinamicamente aqui -->
+              <div class="tags-container" id="tagsContainer" aria-live="polite">
+                <!-- As tags são injetadas dinamicamente via DOM (createElement / textContent) -->
               </div>
-
               <div class="tag-input-group">
-                <input type="text" id="tagInput" placeholder="Ex: Front-end, Engenharia de Software, Algoritmos..." onkeydown="handleTagKeyPress(event)">
-                <button type="button" class="btn btn-secondary" onclick="addTagFromInput()">+ Adicionar</button>
+                <input
+                  type="text"
+                  id="tagInput"
+                  name="tag_input"
+                  placeholder="Ex: Front-end, Engenharia de Software, Algoritmos..."
+                  autocomplete="off"
+                >
+                <button type="button" id="addTagBtn" class="btn btn-secondary">+ Adicionar</button>
               </div>
             </div>
 
             <div class="form-actions">
-              <button type="button" class="btn btn-primary" onclick="alert('Preferências e disciplinas salvas com sucesso!')">Salvar Preferências</button>
+              <button type="submit" id="savePreferencesBtn" class="btn btn-primary">Salvar Preferências</button>
             </div>
           </form>
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="card" aria-labelledby="privacyHeading">
           <div class="card-header">
-            <h3>🔒 Privacidade e Visibilidade</h3>
+            <h2 id="privacyHeading">🔒 Privacidade e Visibilidade</h2>
           </div>
 
-          <div class="checkbox-group">
-            <label class="checkbox-label">
-              <input type="checkbox" checked>
-              Exibir meu perfil em buscas de Matches por Ementa
+          <form id="privacyForm" class="checkbox-group">
+            <label for="privacyMatchSyllabus" class="checkbox-label">
+              <input type="checkbox" id="privacyMatchSyllabus" name="show_in_syllabus_matches" checked>
+              <span>Exibir meu perfil em buscas de Matches por Ementa</span>
             </label>
 
-            <label class="checkbox-label">
-              <input type="checkbox" checked>
-              Permitir convites para Salas de Estudo
+            <label for="privacyStudyInvites" class="checkbox-label">
+              <input type="checkbox" id="privacyStudyInvites" name="allow_study_invites" checked>
+              <span>Permitir convites para Salas de Estudo</span>
             </label>
 
-            <label class="checkbox-label">
-              <input type="checkbox">
-              Ocultar minhas avaliações de materiais públicos
+            <label for="privacyHideRatings" class="checkbox-label">
+              <input type="checkbox" id="privacyHideRatings" name="hide_public_ratings">
+              <span>Ocultar minhas avaliações de materiais públicos</span>
             </label>
-          </div>
-        </div>
 
+            <div class="form-actions">
+              <button type="submit" id="savePrivacyBtn" class="btn btn-secondary">Salvar Privacidade</button>
+            </div>
+          </form>
+        </section>
       </div>
-
     </div>
   </main>
 
   <!-- Modal de Edição de Perfil -->
-  <div id="profileModal" class="modal-overlay" style="display: none;">
+  <div
+    id="profileModal"
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="profileModalTitle"
+    hidden
+  >
     <div class="modal-card">
-      <h3>Editar Seus Dados</h3>
-      <div class="modal-field" style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.5rem;">
-        <label class="modal-label" style="font-size: 0.85rem; font-weight: 600;">Seu Nome:</label>
-        <input type="text" id="inputName" placeholder="Nome Completo">
+      <div class="modal-header">
+        <h2 id="profileModalTitle">Editar Seus Dados</h2>
+        <button type="button" id="closeProfileModalIconBtn" class="modal-close-btn" aria-label="Fechar modal">×</button>
       </div>
-      <div class="modal-field" style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.8rem;">
-        <label class="modal-label" style="font-size: 0.85rem; font-weight: 600;">Seu Curso e Período:</label>
-        <input type="text" id="inputCourse" placeholder="Ex: Eng. Software • 4º P.">
-      </div>
-      <div class="modal-actions" style="display: flex; gap: 0.5rem;">
-        <button class="btn btn-primary btn-flex" style="flex: 1;" onclick="saveProfile()">Salvar</button>
-        <button class="btn btn-outline btn-flex" style="flex: 1;" onclick="closeProfileModal()">Cancelar</button>
-      </div>
+
+      <form id="editProfileForm">
+        <div class="modal-field">
+          <label for="inputName" class="modal-label">Seu Nome:</label>
+          <input type="text" id="inputName" name="full_name" placeholder="Nome Completo" required>
+        </div>
+
+        <div class="modal-field">
+          <label for="inputCourse" class="modal-label">Seu Curso e Período:</label>
+          <input type="text" id="inputCourse" name="course_period" placeholder="Ex: Eng. Software • 4º P." required>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" id="saveProfileBtn" class="btn btn-primary btn-flex">Salvar</button>
+          <button type="button" id="cancelProfileModalBtn" class="btn btn-outline btn-flex">Cancelar</button>
+        </div>
+      </form>
     </div>
   </div>
-
 </body>
 </html>
